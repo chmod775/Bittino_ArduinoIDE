@@ -1,0 +1,3 @@
+[submodule "tools/lpctools"]
+	path = tools/lpctools
+	url = https://github.com/CPELyon/lpctools

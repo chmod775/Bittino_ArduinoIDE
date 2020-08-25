@@ -1,0 +1,18 @@
+
+bittino.name=Bittino
+#
+bittino.upload.tool=lpc_upload
+bittino.upload.protocol=lpc
+bittino.upload.maximum_size=4096
+bittino.upload.use_1200bps_touch=false
+bittino.upload.wait_for_upload_port=true
+#
+bittino.build.mcu=cortex-m0plus
+bittino.build.f_cpu=30000000L
+bittino.build.board=Bittino
+bittino.build.core=lpc845
+bittino.build.extra_flags=-D__LPC845__ -mthumb -MD -D__USE_CMSIS
+bittino.build.ldscript=linker_scripts/gcc/flash.ld
+bittino.build.variant=bittino
+##bittino.build.variant_system_lib=libnxp_lpc800_gcc_rel.a
+
