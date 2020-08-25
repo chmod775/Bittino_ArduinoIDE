@@ -12,10 +12,10 @@
           "version": "3.1.0",
           "category": "Contributed",
 
-          "url": "https://github.com/stm32duino/Arduino_Core_STM32/releases/download/1.8.0/STM32-1.8.0.tar.bz2",
-          "archiveFileName": "STM32-1.8.0.tar.bz2",
-          "checksum": "SHA-256:756d39fab2ca5c0bf857b64153a265dd7ef2c151464bd248d6ca94ee05ca8fe7",
-          "size": "29132822",
+          "url": "https://github.com/chmod775/IDE_BoardManager/releases/download/0.0.1/bittino.tar.bz2",
+          "archiveFileName": "bittino.tar.bz2",
+          "checksum": "SHA-256:31700fd2fcaf0f3a8a5b4f6a743d1ad09c827573ccfacd611953410cfe423008",
+          "size": "33643",
           
           "boards": [
             {"name": "Bittino"}
