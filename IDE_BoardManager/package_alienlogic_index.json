@@ -13,7 +13,7 @@
           "category": "Contributed",
           "url": "https://github.com/chmod775/Bittino_ArduinoIDE/releases/download/0.0.1/bittino.tar.bz2",
           "archiveFileName": "bittino.tar.bz2",
-          "checksum": "5937e177ee5348c7f1f6f5066b6a429ca719e8a879a005bda74872b97f8d9a06",
+          "checksum": "SHA-256:5937e177ee5348c7f1f6f5066b6a429ca719e8a879a005bda74872b97f8d9a06",
           "size": "36712",
           "boards": [
             {
