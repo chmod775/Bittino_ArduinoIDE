@@ -21,13 +21,6 @@
 #define ARDUINO_MAIN
 #include "Arduino.h"
  
-
-#if defined(__CODE_RED)
-  #include <cr_section_macros.h>
-  #include <NXP/crp.h>
-  __CRP const unsigned int CRP_WORD = CRP_NO_CRP ;
-#endif
-
 extern void setup (void);
 extern void loop (void);
 
@@ -46,36 +39,7 @@ void configurePins()
   /* Pin Assign 8 bit Configuration */
   /* U0_TXD */
   /* U0_RXD */
-  LPC_SWM->PINASSIGN0 = 0xffff0004UL;
 
-  /* Pin Assign 1 bit Configuration */
-  #if !defined(USE_SWD)
-    /* Pin setup generated via Switch Matrix Tool
-       ------------------------------------------------
-       PIO0_5 = RESET
-       PIO0_4 = U0_TXD
-       PIO0_3 = GPIO            - Disables SWDCLK
-       PIO0_2 = GPIO (User LED) - Disables SWDIO
-       PIO0_1 = GPIO
-       PIO0_0 = U0_RXD
-       ------------------------------------------------
-       NOTE: SWD is disabled to free GPIO pins!
-       ------------------------------------------------ */
-    LPC_SWM->PINENABLE0 = 0xffffffbfUL;
-  #else
-    /* Pin setup generated via Switch Matrix Tool
-       ------------------------------------------------
-       PIO0_5 = RESET
-       PIO0_4 = U0_TXD
-       PIO0_3 = SWDCLK
-       PIO0_2 = SWDIO
-       PIO0_1 = GPIO
-       PIO0_0 = U0_RXD
-       ------------------------------------------------
-       NOTE: LED on PIO0_2 unavailable due to SWDIO!
-       ------------------------------------------------ */
-    LPC_SWM->PINENABLE0 = 0xffffffb3UL;   
-  #endif  
 }
 
 
@@ -83,13 +47,13 @@ void configurePins()
 int main(void)
 {
   /* Initialise the GPIO block */
-  gpioInit();
+  //gpioInit();
 
   /* Initialise the UART0 block for printf output */
   //uart0Init(115200);
 
   /* Configure the multi-rate timer for 1ms ticks */
-  mrtInit(__SYSTEM_CLOCK/1000);
+  //mrtInit(__SYSTEM_CLOCK/1000);
 
   /* Configure the switch matrix (setup pins for UART0 and GPIO) */
   configurePins();

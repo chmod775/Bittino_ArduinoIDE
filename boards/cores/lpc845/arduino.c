@@ -30,27 +30,21 @@
 
 void pinMode(uint8_t pin, uint8_t mode)
 {
-		if(mode==OUTPUT) LPC_GPIO_PORT->DIR0 |= (1 << pin);
-		else LPC_GPIO_PORT->DIR0 &= ~(1 << pin);
+
 }
 void digitalWrite(uint8_t pin, uint8_t value)
 {
-		if(value==1) LPC_GPIO_PORT->SET0 = 1 << pin;
-		else LPC_GPIO_PORT->CLR0 = 1 << pin;
+	GPIO_PinWrite(GPIO, 0, pin, value);
 }
 
 void digitalToggle(uint8_t pin)
 {
-	LPC_GPIO_PORT->NOT0 = 1 << pin;
+
 }
 
 int digitalRead(uint8_t pin)
 {
 	int result=0;
-	if (LPC_GPIO_PORT->PIN0 & (0x1 << pin))
-	{
-	  result = 1;
-	}
 	return result;
 }
 
@@ -66,14 +60,7 @@ int digitalRead(uint8_t pin)
 
 void delay(unsigned long ms)
 {
-	uint32_t start = (uint32_t)micros(); // changed to uint32 / ChrisMicro
-
-	while (ms > 0) {
-		if (((uint32_t)micros() - start) >= 1000) {
-			ms--;
-			start += 1000;
-		}
-	}
+	//SDK_DelayAtLeastUs(ms * 1000, 30000);
 }
 // https://code.google.com/p/arduino/source/browse/trunk/hardware/arduino/cores/arduino/WMath.cpp
 int32_t map(int32_t x, int32_t in_min, int32_t in_max, int32_t out_min, int32_t out_max)
