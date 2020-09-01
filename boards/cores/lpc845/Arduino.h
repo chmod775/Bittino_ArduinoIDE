@@ -46,12 +46,15 @@
 
 #define INPUT 	0
 #define OUTPUT 	1
+#define INPUT_PULLUP 	1
+#define INPUT_PULLDOWN 	1
+
 
 #define LOW 	0
 #define HIGH 	1
 
-// adc
-#define A1 1 // channel 1
+#define LED_BUILTIN 0
+
 
 #ifdef __cplusplus
 extern "C"{

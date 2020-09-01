@@ -23,7 +23,8 @@ processor_version: 0.0.15
 /* clang-format on */
 
 #include "drivers/fsl_common.h"
-#include "pin_mux.h"
+#include "drivers/fsl_swm.h"
+#include "board/pin_mux.h"
 
 /* FUNCTION ************************************************************************************************************
  *
@@ -55,6 +56,34 @@ BOARD_InitPins:
 /* Function assigned for the Cortex-M0P */
 void BOARD_InitPins(void)
 {
+    /* Enables clock for IOCON.: enable */
+    CLOCK_EnableClock(kCLOCK_Iocon);
+    /* Enables clock for switch matrix.: enable */
+    CLOCK_EnableClock(kCLOCK_Swm);
+
+    IOCON->PIO[14] = ((IOCON->PIO[14] &
+                       /* Mask bits to zero which are setting */
+                       (~(IOCON_PIO_MODE_MASK)))
+
+                      /* Selects function mode (on-chip pull-up/pull-down resistor control).: Inactive. Inactive (no
+                       * pull-down/pull-up resistor enabled). */
+                      | IOCON_PIO_MODE(PIO0_8_MODE_INACTIVE));
+
+    IOCON->PIO[13] = ((IOCON->PIO[13] &
+                       /* Mask bits to zero which are setting */
+                       (~(IOCON_PIO_MODE_MASK)))
+
+                      /* Selects function mode (on-chip pull-up/pull-down resistor control).: Inactive. Inactive (no
+                       * pull-down/pull-up resistor enabled). */
+                      | IOCON_PIO_MODE(PIO0_9_MODE_INACTIVE));
+
+    /* XTALIN connect to P0_8 */
+    SWM_SetFixedPinSelect(SWM0, kSWM_XTALIN, true);
+
+    /* XTALOUT connect to P0_9 */
+    SWM_SetFixedPinSelect(SWM0, kSWM_XTALOUT, true);
+
+    
 }
 /***********************************************************************************************************************
  * EOF

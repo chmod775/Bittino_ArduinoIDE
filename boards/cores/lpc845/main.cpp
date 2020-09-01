@@ -17,6 +17,11 @@
 
 *************************************************************************/
 #include <stdio.h>
+#include "board/board.h"
+#include "board/peripherals.h"
+#include "board/pin_mux.h"
+#include "board/clock_config.h"
+#include "LPC845.h"
 
 #define ARDUINO_MAIN
 #include "Arduino.h"
@@ -24,48 +29,16 @@
 extern void setup (void);
 extern void loop (void);
 
-/* This define should be enabled if you want to      */
-/* maintain an SWD/debug connection to the LPC810,   */
-/* but it will prevent you from having access to the */
-/* LED on the LPC810 Mini Board, which is on the     */
-/* SWDIO pin (PIO0_2).                               */
-// #define USE_SWD
-
-void configurePins()
-{
-  /* Enable SWM clock */
-	//  LPC_SYSCON->SYSAHBCLKCTRL |= (1 << 7);  // this is already done in SystemInit()
-
-  /* Pin Assign 8 bit Configuration */
-  /* U0_TXD */
-  /* U0_RXD */
-
-}
-
-
-
 int main(void)
 {
-  /* Initialise the GPIO block */
-  //gpioInit();
+  /* Init board hardware. */
+  BOARD_InitBootPins();
+  BOARD_InitBootClocks();
+  BOARD_InitBootPeripherals();
 
-  /* Initialise the UART0 block for printf output */
-  //uart0Init(115200);
-
-  /* Configure the multi-rate timer for 1ms ticks */
-  //mrtInit(__SYSTEM_CLOCK/1000);
-
-  /* Configure the switch matrix (setup pins for UART0 and GPIO) */
-  configurePins();
-
-  /* Set the LED pin to output (1 = output, 0 = input) */
-  #if !defined(USE_SWD)
-//    LPC_GPIO_PORT->DIR0 |= (1 << LED_LOCATION);
-  #endif
-
+  /* Arduino's shit */
   setup();
   while(1) loop();
-
 }
 /******************************************************************************
  *

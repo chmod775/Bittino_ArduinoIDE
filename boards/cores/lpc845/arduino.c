@@ -11,41 +11,35 @@
 /**************************************************************************/
 #include "Arduino.h"
 
-// led location on LPC810 mini-kit
-// http://www.lpcware.com/lpc800-mini-kit
-#define LED_LOCATION    (2)
-/* Pin setup generated via Switch Matrix Tool
-   ------------------------------------------------
-   Package	Logic	 Function
-   =======  =====    ========
-   PIN1		PIO0_5 = RESET 			// not usable
-   PIN2		PIO0_4 = U0_TXD
-   PIN3		PIO0_3 = GPIO
-   PIN4		PIO0_2 = GPIO 			// User LED
-   PIN5		PIO0_1 = GPIO			// ISP Switch
-   PIN8		PIO0_0 = U0_RXD
-   ------------------------------------------------
-   NOTE: SWD is disabled to free GPIO pins!
-   ------------------------------------------------ */
+const uint8_t pin_map[] = {0, 17, 4, 13, 18, 23, 14, 21, 0, 7, 25, 1, 24, 16, 11, 10, 0};
 
 void pinMode(uint8_t pin, uint8_t mode)
 {
+	gpio_pin_config_t config =
+	{
+		kGPIO_DigitalInput,
+		0,
+	};
 
+	if (mode == OUTPUT)
+		config.pinDirection = kGPIO_DigitalOutput;
+
+	GPIO_PinInit(GPIO, 0, pin_map[pin], &config);
 }
+
 void digitalWrite(uint8_t pin, uint8_t value)
 {
-	GPIO_PinWrite(GPIO, 0, pin, value);
+	GPIO_PinWrite(GPIO, 0, pin_map[pin], value);
 }
 
 void digitalToggle(uint8_t pin)
 {
-
+	digitalWrite(pin, !digitalRead(pin));
 }
 
 int digitalRead(uint8_t pin)
 {
-	int result=0;
-	return result;
+	return GPIO_PinRead(GPIO, 0, pin_map[pin]);
 }
 
 /*
@@ -60,7 +54,9 @@ int digitalRead(uint8_t pin)
 
 void delay(unsigned long ms)
 {
-	//SDK_DelayAtLeastUs(ms * 1000, 30000);
+  for(int i=0;i<100000;i++) {
+    __asm("nop");
+  }
 }
 // https://code.google.com/p/arduino/source/browse/trunk/hardware/arduino/cores/arduino/WMath.cpp
 int32_t map(int32_t x, int32_t in_min, int32_t in_max, int32_t out_min, int32_t out_max)

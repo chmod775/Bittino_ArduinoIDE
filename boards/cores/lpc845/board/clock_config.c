@@ -73,16 +73,17 @@ void BOARD_BootClockRUN(void)
     CLOCK_SetFroOscFreq(kCLOCK_FroOscOut30M);                    /*!< Set up FRO freq */
     CLOCK_SetFroOutClkSrc(kCLOCK_FroSrcLpwrBootValue);                    /*!< Set FRO clock source */
     POWER_DisablePD(kPDRUNCFG_PD_SYSOSC);                  /*!< Ensure Main osc is on */
+    CLOCK_InitSysOsc(16000000U);                     /*!< Set main osc freq */
     CLOCK_Select(kEXT_Clk_From_SysOsc);                     /*!<select external clock source to sys_osc */
     clock_sys_pll_t config;
     config.src = kCLOCK_SysPllSrcFRO;                   /*!< select FRO for SYSPLL */
-    config.targetFreq = 15000000U;                     /*!< set pll target freq */
+    config.targetFreq = 30000000U;                     /*!< set pll target freq */
     CLOCK_InitSystemPll(&config);                           /*!< set parameters */
     CLOCK_Select(kFRG0_Clk_From_Fro);                     /*!< select fro for frg0 */
     CLOCK_SetFRG0ClkFreq(15000000U);                     /*!< select frg0 freq */
     CLOCK_Select(kFRG1_Clk_From_Fro);                     /*!< select fro for frg1 */
     CLOCK_SetFRG1ClkFreq(15000000U);                     /*!< select frg1 freq */
-    CLOCK_SetMainClkSrc(kCLOCK_MainClkSrcFro);            /*!< select fro for main clock */
+    CLOCK_SetMainClkSrc(kCLOCK_MainClkSrcExtClk);         /*!< select main osc or mclkin for main clock */
     CLOCK_Select(kCLKOUT_From_Fro);                         /*!< select FRO for CLKOUT */
     CLOCK_Select(kSCT_Clk_From_Fro);                        /*!< select FRO for SCT */
     CLOCK_Select(kADC_Clk_From_Fro);                       /*!< select FRO for ADC */

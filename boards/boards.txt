@@ -11,7 +11,7 @@ bittino.build.mcu=cortex-m0plus
 bittino.build.f_cpu=30000000L
 bittino.build.board=Bittino
 bittino.build.core=lpc845
-bittino.build.extra_flags=-D__LPC845__ -mthumb -MD -D__USE_CMSIS
+bittino.build.extra_flags=-D__LPC845__ -mthumb -MD -D__USE_CMSIS -DSDK_OS_BAREMETAL -DSDK_DEBUGCONSOLE=0 -DCR_INTEGER_PRINTF -DPRINTF_FLOAT_ENABLE=1 -D__MCUXPRESSO
 bittino.build.ldscript=linker_scripts/gcc/LPC845_flash.ld
 bittino.build.variant=bittino
 ##bittino.build.variant_system_lib=libnxp_lpc800_gcc_rel.a

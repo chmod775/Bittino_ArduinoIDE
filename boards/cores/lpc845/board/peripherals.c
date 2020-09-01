@@ -13,6 +13,8 @@ product: Peripherals v1.0
 /*******************************************************************************
  * Included files
  ******************************************************************************/
+#include "drivers/fsl_common.h"
+#include "drivers/fsl_gpio.h"
 #include "peripherals.h"
 
 /*******************************************************************************
@@ -20,4 +22,10 @@ product: Peripherals v1.0
  ******************************************************************************/
 void BOARD_InitBootPeripherals(void)
 {
+  BOARD_InitPeripherals();
+}
+
+void BOARD_InitPeripherals(void)
+{
+  GPIO_PortInit(GPIO, 0);
 }

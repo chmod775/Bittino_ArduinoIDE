@@ -36,13 +36,39 @@ typedef enum _pin_mux_direction
 
 #if defined(__cplusplus)
 extern "C" {
-#endif
-
+#endif /* __cplusplus */
 /*!
  * @brief Calls initialization functions.
  *
  */
 void BOARD_InitBootPins(void);
+
+
+/*!
+ * @brief
+ * Selects function mode (on-chip pull-up/pull-down resistor control).
+ * : Inactive.
+ * Inactive (no pull-down/pull-up resistor enabled).
+ */
+#define PIO0_8_MODE_INACTIVE 0x00u
+/*!
+ * @brief
+ * Selects function mode (on-chip pull-up/pull-down resistor control).
+ * : Inactive.
+ * Inactive (no pull-down/pull-up resistor enabled).
+ */
+#define PIO0_9_MODE_INACTIVE 0x00u
+
+/*! @name PIO0_0 (number 24), LEDG
+  @{ */
+
+/* Symbols to be used with GPIO driver */
+#define BOARD_INITPINS_LEDG_GPIO GPIO                /*!<@brief GPIO peripheral base pointer */
+#define BOARD_INITPINS_LEDG_GPIO_PIN_MASK (1U << 0U) /*!<@brief GPIO pin mask */
+#define BOARD_INITPINS_LEDG_PORT 0U                  /*!<@brief PORT device index: 0 */
+#define BOARD_INITPINS_LEDG_PIN 0U                   /*!<@brief PORT pin number */
+#define BOARD_INITPINS_LEDG_PIN_MASK (1U << 0U)      /*!<@brief PORT pin mask */
+  
 
 /*!
  * @brief Configures pin routing and optionally pin electrical features.
@@ -52,8 +78,7 @@ void BOARD_InitPins(void); /* Function assigned for the Cortex-M0P */
 
 #if defined(__cplusplus)
 }
-#endif
-
+#endif /* __cplusplus */
 /*!
  * @}
  */

@@ -10,14 +10,17 @@
 
 #if defined(__cplusplus)
 extern "C" {
-#endif /*_cplusplus. */
-       /*******************************************************************************
-        * BOARD_InitBootPeripherals function
-        ******************************************************************************/
+#endif /* __cplusplus */
+
+/*******************************************************************************
+* BOARD_InitBootPeripherals function
+******************************************************************************/
 void BOARD_InitBootPeripherals(void);
+
+void BOARD_InitPeripherals(void);
 
 #if defined(__cplusplus)
 }
-#endif /*_cplusplus. */
+#endif /* __cplusplus */
 
 #endif /* _PERIPHERALS_H_ */

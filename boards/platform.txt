@@ -12,12 +12,12 @@ version=1.0.0
 
 compiler.path={runtime.tools.xpack-arm-none-eabi-gcc.path}/bin/
 compiler.c.cmd=arm-none-eabi-gcc
-compiler.c.flags=-c -g -w -ffunction-sections -fdata-sections --param max-inline-insns-single=500
+compiler.c.flags=-c -g -Os -w -ffunction-sections -fdata-sections --param max-inline-insns-single=500
 compiler.c.elf.cmd=arm-none-eabi-g++
 compiler.c.elf.flags=-Os -Wl,--gc-sections -specs=nano.specs -specs=nosys.specs
 compiler.S.flags=-c -g -x assembler-with-cpp
 compiler.cpp.cmd=arm-none-eabi-g++
-compiler.cpp.flags=-c -g -w -ffunction-sections -fdata-sections --param max-inline-insns-single=500 -fno-rtti -fno-exceptions
+compiler.cpp.flags=-c -g -Os -w -ffunction-sections -fdata-sections --param max-inline-insns-single=500 -fno-rtti -fno-exceptions
 compiler.ar.cmd=arm-none-eabi-ar
 compiler.ar.flags=rcs
 compiler.objcopy.cmd=arm-none-eabi-objcopy
@@ -61,7 +61,7 @@ recipe.c.o.pattern="{compiler.path}{compiler.c.cmd}" {compiler.c.flags} -mcpu={b
 recipe.cpp.o.pattern="{compiler.path}{compiler.cpp.cmd}" {compiler.cpp.flags} -mcpu={build.mcu} -DF_CPU={build.f_cpu} -DARDUINO={runtime.ide.version} -DARDUINO_{build.board} -DARDUINO_ARCH_{build.arch} {compiler.cpp.extra_flags} {build.extra_flags} {compiler.libsam.c.flags} {includes} "{source_file}" -o "{object_file}"
 
 ## Create archives
-recipe.ar.pattern="{compiler.path}{compiler.ar.cmd}" {compiler.ar.flags} {compiler.ar.extra_flags} "{build.path}/{archive_file}" "{object_file}"
+recipe.ar.pattern="{compiler.path}{compiler.ar.cmd}" {compiler.ar.flags} {compiler.ar.extra_flags} "{archive_file_path}" "{object_file}"
 
 ## Combine gc-sections, archives, and objects
 ##recipe.c.combine.pattern="{compiler.path}{compiler.c.elf.cmd}" {compiler.c.elf.flags} -mcpu={build.mcu} "-T{build.variant.path}/{build.ldscript}" "-Wl,-Map,{build.path}/{build.project_name}.map" {compiler.c.elf.extra_flags} -o "{build.path}/{build.project_name}.elf" "-L{build.path}" -lm -lgcc -mthumb -Wl,--cref -Wl,--check-sections -Wl,--gc-sections -Wl,--entry=Reset_Handler -Wl,--unresolved-symbols=report-all -Wl,--warn-common -Wl,--warn-section-align -Wl,--warn-unresolved-symbols -Wl,--start-group "{build.path}/syscalls_sam3.c.o" {object_files} "{build.variant.path}/{build.variant_system_lib}" "{build.path}/{archive_file}" -Wl,--end-group
