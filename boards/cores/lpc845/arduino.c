@@ -11,37 +11,6 @@
 /**************************************************************************/
 #include "Arduino.h"
 
-const uint8_t pin_map[] = {0, 17, 4, 13, 18, 23, 14, 21, 0, 7, 25, 1, 24, 16, 11, 10, 0};
-
-void pinMode(uint8_t pin, uint8_t mode)
-{
-	gpio_pin_config_t config =
-	{
-		kGPIO_DigitalInput,
-		0,
-	};
-
-	if (mode == OUTPUT)
-		config.pinDirection = kGPIO_DigitalOutput;
-
-	GPIO_PinInit(GPIO, 0, pin_map[pin], &config);
-}
-
-void digitalWrite(uint8_t pin, uint8_t value)
-{
-	GPIO_PinWrite(GPIO, 0, pin_map[pin], value);
-}
-
-void digitalToggle(uint8_t pin)
-{
-	digitalWrite(pin, !digitalRead(pin));
-}
-
-int digitalRead(uint8_t pin)
-{
-	return GPIO_PinRead(GPIO, 0, pin_map[pin]);
-}
-
 /*
  * from wiring.c
  * https://code.google.com/p/arduino/source/browse/trunk/hardware/arduino/cores/arduino/wiring.c

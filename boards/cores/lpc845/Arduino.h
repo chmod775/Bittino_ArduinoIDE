@@ -13,58 +13,40 @@
 #include <string.h>
 #include <math.h>
 
-#include "LPC845.h"
-#include "drivers/fsl_acomp.h"
-#include "drivers/fsl_adc.h"
-#include "drivers/fsl_capt.h"
-#include "drivers/fsl_clock.h"
-#include "drivers/fsl_common.h"
-#include "drivers/fsl_crc.h"
-#include "drivers/fsl_ctimer.h"
-#include "drivers/fsl_dac.h"
-#include "drivers/fsl_dma.h"
-#include "drivers/fsl_gpio.h"
-#include "drivers/fsl_i2c.h"
-#include "drivers/fsl_iap.h"
-#include "drivers/fsl_inputmux.h"
-#include "drivers/fsl_inputmux_connections.h"
-#include "drivers/fsl_iocon.h"
-#include "drivers/fsl_mrt.h"
-#include "drivers/fsl_pint.h"
-#include "drivers/fsl_power.h"
-#include "drivers/fsl_reset.h"
-#include "drivers/fsl_sctimer.h"
-#include "drivers/fsl_spi.h"
-#include "drivers/fsl_swm.h"
-#include "drivers/fsl_swm_connections.h"
-#include "drivers/fsl_syscon.h"
-#include "drivers/fsl_syscon_connections.h"
-#include "drivers/fsl_usart.h"
-#include "drivers/fsl_wkt.h"
-#include "drivers/fsl_wwdt.h"
+#include "arduino/lpc_drivers.h"
 
+typedef bool boolean;
+typedef uint8_t byte;
+typedef uint16_t word;
 
-#define INPUT 	0
-#define OUTPUT 	1
-#define INPUT_PULLUP 	1
-#define INPUT_PULLDOWN 	1
+#include "arduino/binary.h"
+#include "arduino/itoa.h"
 
-
-#define LOW 	0
-#define HIGH 	1
 
 #define LED_BUILTIN 0
-
+#define BUTTON_BUILTIN 16
 
 #ifdef __cplusplus
 extern "C"{
 #endif // __cplusplus
 
+#include "arduino/wiring_constants.h"
 
-void pinMode(uint8_t pin, uint8_t mode);
-void digitalWrite(uint8_t pin, uint8_t value);
-void digitalToggle(uint8_t Pin);
-int digitalRead(uint8_t pin);
+#define clockCyclesPerMicrosecond() ( SystemCoreClock / 1000000L )
+#define clockCyclesToMicroseconds(a) ( ((a) * 1000L) / (SystemCoreClock / 1000L) )
+#define microsecondsToClockCycles(a) ( (a) * (SystemCoreClock / 1000000L) )
+
+
+void yield( void ) ;
+
+/* system functions */
+int main( void );
+void init( void );
+
+/* sketch */
+void setup( void ) ;
+void loop( void ) ;
+
 void delay(uint32_t milliSeconds);
 void Serial_begin(uint32_t baudRate);
 void Serial_print(char * string);
@@ -79,6 +61,36 @@ int32_t map(int32_t x, int32_t in_min, int32_t in_max, int32_t out_min, int32_t 
 } // extern "C"
 #endif // __cplusplus
 
+#include "arduino/wiring.h"
+#include "arduino/wiring_digital.h"
+//#include "arduino/wiring_analog.h"
+//#include "arduino/wiring_shift.h"
 
+// undefine stdlib's abs if encountered
+#ifdef abs
+#undef abs
+#endif // abs
+
+#define min(a,b) ((a)<(b)?(a):(b))
+#define max(a,b) ((a)>(b)?(a):(b))
+#define abs(x) ((x)>0?(x):-(x))
+#define constrain(amt,low,high) ((amt)<(low)?(low):((amt)>(high)?(high):(amt)))
+#define round(x)     ((x)>=0?(long)((x)+0.5):(long)((x)-0.5))
+#define radians(deg) ((deg)*DEG_TO_RAD)
+#define degrees(rad) ((rad)*RAD_TO_DEG)
+#define sq(x) ((x)*(x))
+
+#define interrupts() __enable_irq()
+#define noInterrupts() __disable_irq()
+
+#define lowByte(w) ((uint8_t) ((w) & 0xff))
+#define highByte(w) ((uint8_t) ((w) >> 8))
+
+#define bitRead(value, bit) (((value) >> (bit)) & 0x01)
+#define bitSet(value, bit) ((value) |= (1UL << (bit)))
+#define bitClear(value, bit) ((value) &= ~(1UL << (bit)))
+#define bitWrite(value, bit, bitvalue) (bitvalue ? bitSet(value, bit) : bitClear(value, bit))
+
+#define bit(b) (1UL << (b))
 
 #endif // Arduino_h
