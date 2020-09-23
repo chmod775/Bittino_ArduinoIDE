@@ -22,7 +22,6 @@ typedef uint16_t word;
 #include "arduino/binary.h"
 #include "arduino/itoa.h"
 
-
 #define LED_BUILTIN 0
 #define BUTTON_BUILTIN 16
 
@@ -35,7 +34,6 @@ extern "C"{
 #define clockCyclesPerMicrosecond() ( SystemCoreClock / 1000000L )
 #define clockCyclesToMicroseconds(a) ( ((a) * 1000L) / (SystemCoreClock / 1000L) )
 #define microsecondsToClockCycles(a) ( (a) * (SystemCoreClock / 1000000L) )
-
 
 void yield( void ) ;
 
@@ -65,6 +63,7 @@ int32_t map(int32_t x, int32_t in_min, int32_t in_max, int32_t out_min, int32_t 
 #include "arduino/wiring_digital.h"
 //#include "arduino/wiring_analog.h"
 //#include "arduino/wiring_shift.h"
+
 
 // undefine stdlib's abs if encountered
 #ifdef abs

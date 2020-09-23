@@ -1,0 +1,30 @@
+HAL
+  - UART
+    + constructor(txPin, rxPin)
+    + Setup(baudrate, [bufferSize], [txBuffer], [rxBuffer])
+    + Send(data, [nBytes])
+    + SendString(str)
+    + Receive([nBytes])
+    + ReceiveUntil(endByte)
+    + ReceiveString()
+    + ReceiveStringUntil(endChar)
+    + SendAndReceive()
+    + Callbacks: onRXNewLine, onRXBuffer, onRXAll, onTXDone
+    
+  - SPI
+  
+  - I2C
+
+  - PWM
+    + constructor(pin)
+    + Setup(frequency)
+    + Write(dutyCyclePerc)
+
+  - GPIO
+    + constructor(pin)
+    + Setup(direction, pullLevel, [openDrain], [filter])
+    + SetupInterrupt(mode, callback)
+    [+ SetupMatch()]
+    + Write(value)
+    + Read()
+    + Toggle()

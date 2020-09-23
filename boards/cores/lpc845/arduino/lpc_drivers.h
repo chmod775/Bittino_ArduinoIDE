@@ -2,6 +2,8 @@
 #define lpc_drivers_h
 
 #include "../LPC845.h"
+#include "../LPC845_AL.h"
+
 #include "../drivers/fsl_acomp.h"
 #include "../drivers/fsl_adc.h"
 #include "../drivers/fsl_capt.h"

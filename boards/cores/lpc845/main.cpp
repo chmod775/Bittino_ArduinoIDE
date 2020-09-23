@@ -26,6 +26,8 @@
 #define ARDUINO_MAIN
 #include "Arduino.h"
  
+#include "AL.HAL/al_uart.h"
+
 extern void setup (void);
 extern void loop (void);
 

@@ -74,7 +74,7 @@ uint32_t USART_GetInstance(USART_Type *base)
         }
     }
 
-    assert(i < FSL_FEATURE_SOC_USART_COUNT);
+    //assert(i < FSL_FEATURE_SOC_USART_COUNT);
     return i;
 }
 
@@ -337,7 +337,7 @@ void USART_GetDefaultConfig(usart_config_t *config)
 status_t USART_SetBaudRate(USART_Type *base, uint32_t baudrate_Bps, uint32_t srcClock_Hz)
 {
     /* check arguments */
-    assert(!((NULL == base) || (0U == baudrate_Bps) || (0U == srcClock_Hz)));
+    //assert(!((NULL == base) || (0U == baudrate_Bps) || (0U == srcClock_Hz)));
 
 #if defined(FSL_FEATURE_USART_HAS_OSR_REGISTER) && (FSL_FEATURE_USART_HAS_OSR_REGISTER)
     uint32_t best_diff = (uint32_t)-1, best_osrval = 0xf, best_brgval = (uint32_t)-1;
@@ -377,7 +377,7 @@ status_t USART_SetBaudRate(USART_Type *base, uint32_t baudrate_Bps, uint32_t src
         /* If the baud rate caculated is not very precise, please select the FRG clock as
          * the USART's source clock, and set the FRG frequency to a more suitable value.
          */
-        assert(best_diff < ((baudrate_Bps / 100U) * 3U));
+        //assert(best_diff < ((baudrate_Bps / 100U) * 3U));
 
         base->OSR = best_osrval;
         base->BRG = best_brgval;
@@ -401,7 +401,7 @@ status_t USART_SetBaudRate(USART_Type *base, uint32_t baudrate_Bps, uint32_t src
         /* If the baud rate caculated is not very precise, Please set the FRG register for
          * getting a more precise suitable frequency.
          */
-        assert((((srcClock_Hz >> 4U) / brgval) - baudrate_Bps) < ((baudrate_Bps / 100U) * 3U));
+        //assert((((srcClock_Hz >> 4U) / brgval) - baudrate_Bps) < ((baudrate_Bps / 100U) * 3U));
         base->BRG = brgval - 1U;
     }
 #endif /* FSL_FEATURE_USART_HAS_OSR_REGISTER */
@@ -423,7 +423,7 @@ status_t USART_SetBaudRate(USART_Type *base, uint32_t baudrate_Bps, uint32_t src
 status_t USART_WriteBlocking(USART_Type *base, const uint8_t *data, size_t length)
 {
     /* Check arguments */
-    assert(!((NULL == base) || (NULL == data)));
+    //assert(!((NULL == base) || (NULL == data)));
 #if UART_RETRY_TIMES
     uint32_t waitTimes;
 #endif

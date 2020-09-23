@@ -165,6 +165,7 @@ extern volatile uint32_t g_Ext_Clk_Freq;
 #define CLK_GATE_GET_BITS_SHIFT(x) ((uint32_t)(x)&0xFFU)
 /* clock mux register definition */
 #define CLK_MUX_DEFINE(reg, mux) (((offsetof(SYSCON_Type, reg) & 0xFFU) << 8U) | ((mux)&0xFFU))
+//#define CLK_MUX_DEFINE(reg, mux) (((((uint32_t)(&((SYSCON_Type *)0U)->reg)) & 0xFFU) << 8U) | ((mux)&0xFFU))
 #define CLK_MUX_GET_REG(x) ((volatile uint32_t *)(((uint32_t)(SYSCON)) + (((uint32_t)(x) >> 8U) & 0xFFU)))
 #define CLK_MUX_GET_MUX(x) (((uint32_t)(x)) & 0xFFU)
 #define CLK_MAIN_CLK_MUX_DEFINE(preMux, mux) ((preMux) << 8U | (mux))
@@ -172,6 +173,7 @@ extern volatile uint32_t g_Ext_Clk_Freq;
 #define CLK_MAIN_CLK_MUX_GET_MUX(x) ((uint32_t)(x)&0xFFU)
 /* clock divider register definition */
 #define CLK_DIV_DEFINE(reg) (offsetof(SYSCON_Type, reg) & 0xFFFU)
+//#define CLK_DIV_DEFINE(reg) (((uint32_t)(&((SYSCON_Type *)0U)->reg)) & 0xFFFU)
 #define CLK_DIV_GET_REG(x) *((volatile uint32_t *)(((uint32_t)(SYSCON)) + ((uint32_t)(x)&0xFFFU)))
 /* watch dog oscillator definition */
 #define CLK_WDT_OSC_DEFINE(freq, regValue) (((freq)&0xFFFFFFU) | (((regValue)&0xFFU) << 24U))
