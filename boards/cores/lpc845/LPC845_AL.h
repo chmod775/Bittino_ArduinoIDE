@@ -6,7 +6,8 @@
 #include "drivers/fsl_clock.h"
 
 /* USARTs array */
-extern USART_Type *USARTS_ARRAY[];
+extern const USART_Type *USARTS_ARRAY[];
+extern const IRQn_Type IRQ_USARTS_ARRAY[5];
 
 extern const swm_select_movable_t SWM_USARTS_ARRAY[5][5];
 

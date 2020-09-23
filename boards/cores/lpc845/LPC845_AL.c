@@ -1,7 +1,7 @@
 #include "LPC845_AL.h"
 
 /* USARTs array */
-USART_Type *USARTS_ARRAY[] = USART_BASE_PTRS;
+const USART_Type *USARTS_ARRAY[] = USART_BASE_PTRS;
 
 const swm_select_movable_t SWM_USARTS_ARRAY[5][5] = {
     { kSWM_USART0_TXD,    kSWM_USART0_RXD,    kSWM_USART0_RTS,    kSWM_USART0_CTS,    kSWM_USART0_SCLK },
@@ -10,6 +10,8 @@ const swm_select_movable_t SWM_USARTS_ARRAY[5][5] = {
     { kSWM_USART3_TXD,    kSWM_USART3_RXD,    kSWM_MOVABLE_NUM_FUNCS,                  kSWM_MOVABLE_NUM_FUNCS,                  kSWM_USART3_SCLK },
     { kSWM_USART4_TXD,    kSWM_USART4_RXD,    kSWM_MOVABLE_NUM_FUNCS,                  kSWM_MOVABLE_NUM_FUNCS,                  kSWM_USART4_SCLK },
 };
+
+const IRQn_Type IRQ_USARTS_ARRAY[5] = USART_IRQS;
 
 const clock_select_t CLOCK_USARTS_ARRAY[5][5] = {
   { kUART0_Clk_From_Fro    ,    kUART0_Clk_From_MainClk,    kUART0_Clk_From_Frg0Clk,    kUART0_Clk_From_Frg1Clk,    kUART0_Clk_From_Fro_Div },

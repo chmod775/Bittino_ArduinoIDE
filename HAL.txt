@@ -8,8 +8,9 @@ HAL
     + ReceiveUntil(endByte)
     + ReceiveString()
     + ReceiveStringUntil(endChar)
+    + Echo(enable/disable)
     + SendAndReceive()
-    + Callbacks: onRXNewLine, onRXBuffer, onRXAll, onTXDone
+    + Callbacks: onRXNewLine, onRXCharMatch, onRXBufferFull, onRXAll, onTXDone
     
   - SPI
   
