@@ -11,7 +11,7 @@ const swm_select_movable_t SWM_USARTS_ARRAY[5][5] = {
     { kSWM_USART4_TXD,    kSWM_USART4_RXD,    kSWM_MOVABLE_NUM_FUNCS,                  kSWM_MOVABLE_NUM_FUNCS,                  kSWM_USART4_SCLK },
 };
 
-const IRQn_Type IRQ_USARTS_ARRAY[5] = USART_IRQS;
+const IRQn_Type IRQ_USARTS_ARRAY[] = USART_IRQS;
 
 const clock_select_t CLOCK_USARTS_ARRAY[5][5] = {
   { kUART0_Clk_From_Fro    ,    kUART0_Clk_From_MainClk,    kUART0_Clk_From_Frg0Clk,    kUART0_Clk_From_Frg1Clk,    kUART0_Clk_From_Fro_Div },
@@ -20,6 +20,10 @@ const clock_select_t CLOCK_USARTS_ARRAY[5][5] = {
   { kUART3_Clk_From_Fro    ,    kUART3_Clk_From_MainClk,    kUART3_Clk_From_Frg0Clk,    kUART3_Clk_From_Frg1Clk,    kUART3_Clk_From_Fro_Div },
   { kUART4_Clk_From_Fro    ,    kUART4_Clk_From_MainClk,    kUART4_Clk_From_Frg0Clk,    kUART4_Clk_From_Frg1Clk,    kUART4_Clk_From_Fro_Div }
 };
+
+/* PWMs array */
+const swm_select_movable_t SWM_PWMS_ARRAY[] = { kSWM_SCT_OUT0, kSWM_SCT_OUT1, kSWM_SCT_OUT2, kSWM_SCT_OUT3, kSWM_SCT_OUT4, kSWM_SCT_OUT5, kSWM_SCT_OUT6 };
+const sctimer_out_t SCTIMER_OUT_ARRAY[] = { kSCTIMER_Out_0, kSCTIMER_Out_1, kSCTIMER_Out_2, kSCTIMER_Out_3, kSCTIMER_Out_4, kSCTIMER_Out_5, kSCTIMER_Out_6, kSCTIMER_Out_7, kSCTIMER_Out_8, kSCTIMER_Out_9 };
 
 /* IOCON BittinoPin array */
 const unsigned short IOCON_INDEX_BP_ARRAY[] = {

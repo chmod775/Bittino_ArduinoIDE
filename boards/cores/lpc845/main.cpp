@@ -27,6 +27,7 @@
 #include "Arduino.h"
  
 #include "AL.HAL/al_uart.h"
+#include "AL.HAL/al_pwm.h"
 
 extern void setup (void);
 extern void loop (void);

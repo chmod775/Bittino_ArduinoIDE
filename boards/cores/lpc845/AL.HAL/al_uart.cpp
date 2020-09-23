@@ -19,7 +19,9 @@ void USART4_IRQHandler(void) { if (USARTS_Instances[4] != NULL) USARTS_Instances
 AL_USART::AL_USART(uint8_t ID, uint8_t txPin, uint8_t rxPin, uint8_t rtsPin, uint8_t ctsPin, uint8_t sclkPin)
 {
   if (ID > FSL_FEATURE_SOC_USART_COUNT) return;
+  // Valutate to use a static constructor to return exiting instance
   this->ID = ID;
+  USARTS_Instances[ID] = this;
 
   CLOCK_Select(CLOCK_USARTS_ARRAY[ID][1]); // From_MainClk
 
@@ -48,7 +50,6 @@ AL_USART::AL_USART(uint8_t ID, uint8_t txPin, uint8_t rxPin, uint8_t rtsPin, uin
     SWM_SetMovablePinSelect(SWM0, SWM_USARTS_ARRAY[ID][4], SWM_PORTPIN_BP_ARRAY[sclkPin]);
   }
 
-  USARTS_Instances[ID] = this;
   usart = (USART_Type *)(USARTS_ARRAY[ID]);
 }
 

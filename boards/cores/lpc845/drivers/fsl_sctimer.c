@@ -387,7 +387,7 @@ status_t SCTIMER_SetupPwm(SCT_Type *base,
  * param event             Event number associated with this PWM signal. This was returned to the user by the
  *                          function SCTIMER_SetupPwm().
  */
-void SCTIMER_UpdatePwmDutycycle(SCT_Type *base, sctimer_out_t output, uint8_t dutyCyclePercent, uint32_t event)
+void SCTIMER_UpdatePwmDutycycle(SCT_Type *base, sctimer_out_t output, uint32_t dutyCyclePercent, uint32_t event)
 
 {
     assert(dutyCyclePercent > 0U);
@@ -406,10 +406,10 @@ void SCTIMER_UpdatePwmDutycycle(SCT_Type *base, sctimer_out_t output, uint8_t du
     period = base->MATCH[periodMatchReg];
 
     /* Calculate pulse width match value */
-    pulsePeriod = (period * dutyCyclePercent) / 100U;
+    pulsePeriod = (period * dutyCyclePercent) / 1000U;
 
     /* For 100% dutycyle, make pulse period greater than period so the event will never occur */
-    if (dutyCyclePercent >= 100U)
+    if (dutyCyclePercent >= 1000U)
     {
         pulsePeriod = period + 2U;
     }

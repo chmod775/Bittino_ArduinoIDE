@@ -385,7 +385,7 @@ status_t SCTIMER_SetupPwm(SCT_Type *base,
  * @param event             Event number associated with this PWM signal. This was returned to the user by the
  *                          function SCTIMER_SetupPwm().
  */
-void SCTIMER_UpdatePwmDutycycle(SCT_Type *base, sctimer_out_t output, uint8_t dutyCyclePercent, uint32_t event);
+void SCTIMER_UpdatePwmDutycycle(SCT_Type *base, sctimer_out_t output, uint32_t dutyCyclePercent, uint32_t event);
 
 /*!
  * @name Interrupt Interface
